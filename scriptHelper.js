@@ -34,6 +34,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let fuelStatus = document.getElementById('fuelStatus')
     let cargoStatus = document.getElementById('cargoStatus')
 
+    list.style.visibility = 'visible'
 
 
     pilotStatus.innerHTML = "Pilot " + pilot + " ready for launch"
@@ -45,10 +46,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         launchStatus.style.color = 'red'
 
         if (fuelLevel < 10000) {
-            list.style.visibility = 'visible'
             fuelStatus.innerHTML = "Fuel level too low for launch"
         } else {
-            list.style.visibility = 'visible'
             cargoStatus.innerHTML = "Cargo mass too high for launch"
         }
 
@@ -75,8 +74,58 @@ function pickPlanet(planets) {
     return planets[randomNum]
 }
 
+// Used to concat all of the names of the
+// field that may have a problem 
+function strBuilder(obj, str) {
+    if (str === "") {
+        str += obj.name
+    } else {
+        str += `, ${obj.name}`
+    }
+    return str
+}
+
+// Checks if any of the input fields 
+// and return an aray of strings input names 
+function errorMsgBuilder(arr) {
+    let empty = ""
+    let shouldBeStr = ""
+    let shouldBeNum = ""
+    let errorMsg = ""
+
+    for (let i = 0; i < arr.length; i++) {
+        if (validateInput(arr[i].value) === "Empty") {
+            empty = strBuilder(arr[i], empty)
+        } else if (validateInput(arr[i].value) === "Is a Number") {
+            if (arr[i].name == "pilotName" || arr[i].name == "copilotName") {
+                shouldBeStr = strBuilder(arr[i], shouldBeStr)
+            }
+        } else {
+            if (arr[i].name == "fuelLevel" || arr[i].name == "cargoMass") {
+                shouldBeNum = strBuilder(arr[i], shouldBeNum)
+            }
+        }
+    }
+
+    if (empty) {
+        empty += " should be filled"
+        errorMsg += `${empty}\n`
+    }
+    if (shouldBeStr) {
+        shouldBeStr += " should be in letters"
+        errorMsg += `${shouldBeStr}\n`
+    }
+    if (shouldBeNum) {
+        shouldBeNum += " should be in numbers"
+        errorMsg += `${shouldBeNum}`
+    }
+    return errorMsg
+}
+
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
 module.exports.pickPlanet = pickPlanet; 
 module.exports.myFetch = myFetch;
+
+module.exports.errorMsgBuilder = errorMsgBuilder;

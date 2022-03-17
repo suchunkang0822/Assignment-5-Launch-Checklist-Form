@@ -1,6 +1,5 @@
 // Write your JavaScript code here!
 
-
 window.addEventListener("load", function () {
 
 
@@ -23,7 +22,7 @@ window.addEventListener("load", function () {
         let form = this.document.querySelector("form")
         form.addEventListener("submit", e => {
 
-            let list = this.document.getElementById('faultyItems')
+            // let list = this.document.getElementById('faultyItems')
             let pilotName = this.document.querySelector('input[name=pilotName]')
             let copilotName = this.document.querySelector('input[name=copilotName]')
             let fuelLevel = this.document.querySelector('input[name=fuelLevel]')

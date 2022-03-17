@@ -2,26 +2,6 @@
 require('isomorphic-fetch');
 
 
-// let launchStatus = document.getElementById('launchStatus')
-// let pilotStatus = document.getElementById("pilotStatus")
-// let copilotStatus = document.getElementById("copilotStatus")
-// let fuelStatus = document.getElementById('fuelStatus')
-// let cargoStatus = document.getElementById('cargoStatus')
-
-// // I only wrote these because only then would it pass
-// // the test case where list.style.visibility = 'hidden'
-// // Why is the test case not passing eventhough the default
-// // list.style.visibility is 'hidden' in the css file?
-// let list = this.document.getElementById('faultyItems')
-// list.style.visibility = 'hidden'
-
-// console.log(list.style.visibility)
-// console.log(pilotStatus.textContent)
-// console.log(copilotStatus.textContent)
-// console.log(fuelStatus.textContent)
-// console.log(cargoStatus.textContent)
-
-
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
     let missionTarget = document.getElementById('missionTarget')
